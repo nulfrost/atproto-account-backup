@@ -1,0 +1,18 @@
+{
+  "did": "did:plc:qttsv4e7pu2jl3ilanfgc3zn",
+  "verificationMethods": {
+    "atproto": "did:key:zQ3shr8Zx1f9XS2CPaSqFwbdd5y1QczpoDhMtk6oD2yCSJ4cN"
+  },
+  "rotationKeys": [
+    "did:key:zQ3shMcQZoTmNrB5A1MCMcsGnGPTqyxk3FQmS6aqx247JEzGm"
+  ],
+  "alsoKnownAs": [
+    "at://dane.is.extraordinarily.cool"
+  ],
+  "services": {
+    "atproto_pds": {
+      "type": "AtprotoPersonalDataServer",
+      "endpoint": "https://pds.is.extraordinarily.cool"
+    }
+  }
+}
