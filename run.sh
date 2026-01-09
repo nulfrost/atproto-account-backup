@@ -1,2 +1,2 @@
 #!/bin/bash
-./backup.sh @dane.is.extraordinarily.cool
+./backup.sh did:plc:qttsv4e7pu2jl3ilanfgc3zn
