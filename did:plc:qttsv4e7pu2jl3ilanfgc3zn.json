@@ -1,0 +1,26 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/multikey/v1",
+    "https://w3id.org/security/suites/secp256k1-2019/v1"
+  ],
+  "id": "did:plc:qttsv4e7pu2jl3ilanfgc3zn",
+  "alsoKnownAs": [
+    "at://besaid.zone"
+  ],
+  "verificationMethod": [
+    {
+      "id": "did:plc:qttsv4e7pu2jl3ilanfgc3zn#atproto",
+      "type": "Multikey",
+      "controller": "did:plc:qttsv4e7pu2jl3ilanfgc3zn",
+      "publicKeyMultibase": "zQ3shr8Zx1f9XS2CPaSqFwbdd5y1QczpoDhMtk6oD2yCSJ4cN"
+    }
+  ],
+  "service": [
+    {
+      "id": "#atproto_pds",
+      "type": "AtprotoPersonalDataServer",
+      "serviceEndpoint": "https://pds.is.extraordinarily.cool"
+    }
+  ]
+}
