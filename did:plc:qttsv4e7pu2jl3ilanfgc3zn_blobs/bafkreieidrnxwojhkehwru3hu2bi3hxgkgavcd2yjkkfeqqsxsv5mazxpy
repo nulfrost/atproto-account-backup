@@ -1,0 +1,97 @@
+From f82d79436e22d049a34501c69bf40c10cf6782dc Mon Sep 17 00:00:00 2001
+From: "besaid.zone" <me@dane.computer>
+Date: Fri, 9 Jan 2026 20:24:24 -0500
+Subject: [PATCH] setting up datbase to keep track of registered relays
+Change-Id: qrvxqwsomovtmqqnolwvwtwqtxutxkwl
+
+---
+ db.go   | 31 +++++++++++++++++++++++++++++++
+ go.mod  |  2 ++
+ go.sum  |  2 ++
+ main.go |  6 +++++-
+ 4 files changed, 40 insertions(+), 1 deletion(-)
+ create mode 100644 db.go
+ create mode 100644 go.sum
+
+diff --git a/db.go b/db.go
+new file mode 100644
+index 0000000..5a821c3
+--- /dev/null
++++ b/db.go
+@@ -0,0 +1,31 @@
++package main
++
++import (
++	"database/sql"
++	"log"
++
++	_ "github.com/mattn/go-sqlite3"
++)
++
++func (s *Server) NewStorage() (*sql.DB, error) {
++	db, err := sql.Open("sqlite3", "./scatter.db");
++
++	_, err = db.Exec(`
++			pragma foreign_keys = on;
++			pragma journal_mode = wal;
++
++			create table if not exists relays (
++				id integer primary key,
++				url text not null,
++				created_at datetime default current_timestamp
++			)
++		`)
++
++	if err != nil {
++		log.Fatal("error initializing database", err)
++	}
++
++	defer db.Close()
++
++	return db, nil
++}
+diff --git a/go.mod b/go.mod
+index 404ec82..7b28aaf 100644
+--- a/go.mod
++++ b/go.mod
+@@ -1,3 +1,5 @@
+ module tangled.org/besaid.zone/scatter
+ 
+ go 1.25.5
++
++require github.com/mattn/go-sqlite3 v1.14.33 // indirect
+diff --git a/go.sum b/go.sum
+new file mode 100644
+index 0000000..3de9741
+--- /dev/null
++++ b/go.sum
+@@ -0,0 +1,2 @@
++github.com/mattn/go-sqlite3 v1.14.33 h1:A5blZ5ulQo2AtayQ9/limgHEkFreKj1Dv226a1K73s0=
++github.com/mattn/go-sqlite3 v1.14.33/go.mod h1:Uh1q+B4BYcTPb+yiD3kU8Ct7aC0hY9fxUwlHK0RXw+Y=
+diff --git a/main.go b/main.go
+index cbc2991..b051d03 100644
+--- a/main.go
++++ b/main.go
+@@ -36,13 +36,17 @@ func (s *Server) start() error {
+ 		w.Write([]byte("Welcome to scatter"))
+ 	})
+ 
++	router.HandleFunc("POST /xrpc/com.atproto.sync.register", func(w http.ResponseWriter, r *http.Request) {
++		// register with the service to send and recieve requestCrawls
++	})
++
+ 	router.HandleFunc("POST /xrpc/com.atproto.sync.requestCrawlBroadcast", func(w http.ResponseWriter, req *http.Request) {
+ 		// forward requestCrawl request to list of relays that this service knows about
+ 	})
+ 
+ 	server := http.Server{
+ 		Addr:         s.addr,
+-		WriteTimeout: 5 * time.Second,
++		WriteTimeout: 10 * time.Minute,
+ 		ReadTimeout:  10 * time.Second,
+ 		IdleTimeout:  30 * time.Second,
+ 		Handler:      router,
+-- 
+2.43.0
+
+

@@ -1,0 +1,73 @@
+From 0538a13146a56f5cc782c7c1f3f7ef8b606bdccf Mon Sep 17 00:00:00 2001
+From: "besaid.zone" <me@dane.computer>
+Date: Fri, 9 Jan 2026 17:56:37 -0500
+Subject: [PATCH] iterating on some ideas
+Change-Id: qzkqlxrpnmlmtsuxkmlulqsplmusvnxv
+
+---
+ main.go | 49 +++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 47 insertions(+), 2 deletions(-)
+
+diff --git a/main.go b/main.go
+index 284eaba..cbc2991 100644
+--- a/main.go
++++ b/main.go
+@@ -1,7 +1,52 @@
+ package main
+ 
+-import "fmt"
++import (
++	"fmt"
++	"log"
++	"log/slog"
++	"net/http"
++	"os"
++	"time"
++)
++
++type Server struct {
++	addr string
++}
+ 
+ func main() {
+-	fmt.Prinln("yo")
++	server := Server{
++		addr: ":8080",
++	}
++
++	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
++	logger.Info(fmt.Sprintf("scatter server started at 0.0.0.0%s", server.addr))
++
++	if err := server.start(); err != nil {
++		log.Fatal(err)
++		os.Exit(-1)
++	}
++
++}
++
++func (s *Server) start() error {
++	router := http.NewServeMux()
++
++	router.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
++		w.WriteHeader(200)
++		w.Write([]byte("Welcome to scatter"))
++	})
++
++	router.HandleFunc("POST /xrpc/com.atproto.sync.requestCrawlBroadcast", func(w http.ResponseWriter, req *http.Request) {
++		// forward requestCrawl request to list of relays that this service knows about
++	})
++
++	server := http.Server{
++		Addr:         s.addr,
++		WriteTimeout: 5 * time.Second,
++		ReadTimeout:  10 * time.Second,
++		IdleTimeout:  30 * time.Second,
++		Handler:      router,
++	}
++
++	return server.ListenAndServe()
+ }
+-- 
+2.43.0
+
+
