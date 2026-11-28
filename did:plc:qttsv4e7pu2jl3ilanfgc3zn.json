@@ -2,7 +2,8 @@
   "@context": [
     "https://www.w3.org/ns/did/v1",
     "https://w3id.org/security/multikey/v1",
-    "https://w3id.org/security/suites/secp256k1-2019/v1"
+    "https://w3id.org/security/suites/secp256k1-2019/v1",
+    "https://w3id.org/security/suites/ecdsa-2019/v1"
   ],
   "id": "did:plc:qttsv4e7pu2jl3ilanfgc3zn",
   "alsoKnownAs": [
@@ -14,6 +15,12 @@
       "type": "Multikey",
       "controller": "did:plc:qttsv4e7pu2jl3ilanfgc3zn",
       "publicKeyMultibase": "zQ3shr8Zx1f9XS2CPaSqFwbdd5y1QczpoDhMtk6oD2yCSJ4cN"
+    },
+    {
+      "id": "did:plc:qttsv4e7pu2jl3ilanfgc3zn#atproto_kem",
+      "type": "Multikey",
+      "controller": "did:plc:qttsv4e7pu2jl3ilanfgc3zn",
+      "publicKeyMultibase": "zDnaeU5gHos1e4wMiCdkKiSnc3xJDvzp759n5NW3efv3TXKSb"
     }
   ],
   "service": [

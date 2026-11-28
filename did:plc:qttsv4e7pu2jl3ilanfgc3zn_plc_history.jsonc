@@ -184,3 +184,24 @@
     "atproto": "did:key:zQ3shr8Zx1f9XS2CPaSqFwbdd5y1QczpoDhMtk6oD2yCSJ4cN"
   }
 }
+{
+  "alsoKnownAs": [
+    "at://besaid.zone"
+  ],
+  "prev": "bafyreid7u74gzr4ovgr4ayvsrz3ma4j6n52uxq5f3inlea55nbse57kmai",
+  "rotationKeys": [
+    "did:key:zQ3shMcQZoTmNrB5A1MCMcsGnGPTqyxk3FQmS6aqx247JEzGm"
+  ],
+  "services": {
+    "atproto_pds": {
+      "endpoint": "https://pds.is.extraordinarily.cool",
+      "type": "AtprotoPersonalDataServer"
+    }
+  },
+  "sig": "m4XUEe8xo1CGn2b4lQhhwyS9zcmxmYcTa-e6cqxaiet7ymJrv0LefI2ei-gu-ItxDZU8lghzaW8K6nyS4LfFgA",
+  "type": "plc_operation",
+  "verificationMethods": {
+    "atproto": "did:key:zQ3shr8Zx1f9XS2CPaSqFwbdd5y1QczpoDhMtk6oD2yCSJ4cN",
+    "atproto_kem": "did:key:zDnaeU5gHos1e4wMiCdkKiSnc3xJDvzp759n5NW3efv3TXKSb"
+  }
+}

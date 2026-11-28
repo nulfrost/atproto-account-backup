@@ -1,7 +1,8 @@
 {
   "did": "did:plc:qttsv4e7pu2jl3ilanfgc3zn",
   "verificationMethods": {
-    "atproto": "did:key:zQ3shr8Zx1f9XS2CPaSqFwbdd5y1QczpoDhMtk6oD2yCSJ4cN"
+    "atproto": "did:key:zQ3shr8Zx1f9XS2CPaSqFwbdd5y1QczpoDhMtk6oD2yCSJ4cN",
+    "atproto_kem": "did:key:zDnaeU5gHos1e4wMiCdkKiSnc3xJDvzp759n5NW3efv3TXKSb"
   },
   "rotationKeys": [
     "did:key:zQ3shMcQZoTmNrB5A1MCMcsGnGPTqyxk3FQmS6aqx247JEzGm"
